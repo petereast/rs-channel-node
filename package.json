@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "ava": "^2.4.0",
+    "ava-ts": "^0.25.2",
+    "tslint": "^5.20.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.3"
+  },
+  "name": "rs-channel-node",
+  "description": "Something like a rust channel but in node",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "ava-ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "tslint",
+    "doc": "typedoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petereast/rs-channel-node.git"
+  },
+  "keywords": [
+    "mpsc"
+  ],
+  "author": "Peter East <petereast+github@pm.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/petereast/rs-channel-node/issues"
+  },
+  "homepage": "https://github.com/petereast/rs-channel-node#readme"
+}
