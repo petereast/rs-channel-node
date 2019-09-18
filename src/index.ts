@@ -1,22 +1,23 @@
 export class Channel<T> {
-  innerQueue: Array<T> = [];
+  public queue: T[] = [];
+  private maxLength: number = 10;
 
-  public static open<T>(
-    maxLength: number = 10
-  ): [(item: T) => void, () => Generator<T>] {
+  private innerGen = function *(): Generator<T | undefined > {
+    yield this.queue.shift();
+  };
+
+  public push(item: T) {
+    this.queue.push(item);
+  }
+
+  public pull(): T {
+    return this.innerGen().next().value;
+  }
+  public use(
+  ): [(item: T) => void, () => T] {
     return [
-      function(item: T) {
-        if (this.innerQueue.length < maxLength) {
-          this.innerQueue.push(item);
-        } else {
-          // Block until the queue is a bit more empty
-          // tslint:disable-next-line
-          console.log('too many things!');
-        }
-      },
-      function*(): Generator<T> {
-        yield this.innerQueue.shift();
-      }
+      (t) => this.push(t),
+      () => this.pull(),
     ];
   }
 }
