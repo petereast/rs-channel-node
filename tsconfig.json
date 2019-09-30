@@ -10,7 +10,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./src",
-    "incremental": true,
+    "incremental": false,
     "strictNullChecks": true
   },
   "exclude": ["node_modules", "src/**/*.test.ts"],
