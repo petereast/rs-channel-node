@@ -1,6 +1,9 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "readable-stream": "^3.4.0"
+  },
   "devDependencies": {
+    "@types/readable-stream": "^2.3.4",
     "ava": "^2.4.0",
     "ava-ts": "^0.25.2",
     "ts-node": "^8.4.1",
@@ -16,7 +19,7 @@
     "test": "ava-ts",
     "build": "tsc -p tsconfig.json",
     "lint": "tslint --project tsconfig.json",
-    "doc": "typedoc"
+    "doc": "typedoc --mode file --out doc/ --tsconfig tsconfig.json --exclude src/**/*.test.ts src/"
   },
   "repository": {
     "type": "git",
