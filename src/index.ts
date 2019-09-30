@@ -1,23 +1,18 @@
-export class Channel<T> {
-  public queue: T[] = [];
-  private maxLength: number = 10;
+import { Readable } from "readable-stream";
 
-  private innerGen = function *(): Generator<T | undefined > {
-    yield this.queue.shift();
+export function channel<T>(): [(item: T) => void, () => Promise<T | undefined> ] {
+  const stream: Readable = new Readable({objectMode: true});
+  stream._read = () => undefined;
+
+  const send = (i: T) => stream.push(i);
+
+  const recv = (): Promise<T | undefined> => {
+    return new Promise((resolve, reject) => {
+      stream.on("data", (data: T) => {
+        resolve(data);
+      });
+    });
   };
 
-  public push(item: T) {
-    this.queue.push(item);
-  }
-
-  public pull(): T {
-    return this.innerGen().next().value;
-  }
-  public use(
-  ): [(item: T) => void, () => T] {
-    return [
-      (t) => this.push(t),
-      () => this.pull(),
-    ];
-  }
+  return [send, recv];
 }
