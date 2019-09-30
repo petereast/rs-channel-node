@@ -28,5 +28,4 @@ test("functional channels work better", async (t: TestContext) => {
   t.deepEqual("string 2", await recv());
   t.deepEqual("string 3", await recv());
   t.deepEqual("string 4", await recv());
-
 });

@@ -8,7 +8,7 @@ test("DataStream works as expected", (t: TestContext) => {
 
     stream.write("some data");
 
-    stream.on("data", (data) => {
+    stream.on("data", data => {
       t.deepEqual(data, "some data");
       resolve();
     });

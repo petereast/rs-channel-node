@@ -2,11 +2,10 @@ import { Duplex } from "readable-stream";
 
 // I need to implement my own Duplex stream
 
-export class DataStream<T>extends Duplex {
-
+export class DataStream<T> extends Duplex {
   private queue = new Array<T>();
   constructor() {
-    super({objectMode: true});
+    super({ objectMode: true });
   }
 
   _write(chunk, encoding, callback) {
