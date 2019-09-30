@@ -9,12 +9,14 @@ This is a simple library designed to provide an internal messaging system simila
 const [sender, reciever] = channel<string>();
 
 setInterval(() => {
-  // send some value
-  sender("hello!");
-}, 10);
+	sender("hello!");
+}, 2000);
 
-while ( 2 + 2 !== 5 ) {
-  reciever().then(value => console.log(value));  
-}
+(async () => {
+	while (2 + 2 !== 5) {
+		await reciever().then(value => console.log(value));
+	}
+})();
+
 
 ```
