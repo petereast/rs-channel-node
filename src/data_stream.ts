@@ -2,7 +2,7 @@ import { Duplex } from "readable-stream";
 
 // I need to implement my own Duplex stream
 
-class DataStream<T>extends Duplex {
+export class DataStream<T>extends Duplex {
 
   private queue = new Array<T>();
   constructor() {
@@ -25,24 +25,4 @@ class DataStream<T>extends Duplex {
       this.push(chunk);
     }
   }
-}
-
-export function channel<T>(maxSize: number = 100): [(item: T) => void, () => Promise<T> ] {
-  const stream = new DataStream();
-
-  const send = (i: T) => {
-    stream.write(i);
-  };
-
-  const recv = (): Promise<T> => {
-    return new Promise((resolve, reject) => {
-      stream.resume();
-      stream.once("data", (data) => {
-        stream.pause();
-        resolve(data);
-      });
-    });
-  };
-
-  return [send, recv];
 }

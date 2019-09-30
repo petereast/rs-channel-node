@@ -19,15 +19,14 @@ test.todo("The channel can exist across many contexts");
 test("functional channels work better", async (t: TestContext) => {
   const [send, recv] = channel<string>();
 
-  send("something");
-  send("something");
-  send("something");
-  send("something");
+  send("string 1");
+  send("string 2");
+  send("string 3");
+  send("string 4");
 
-  const out = [recv(), recv(), recv(), recv()];
+  t.deepEqual("string 1", await recv());
+  t.deepEqual("string 2", await recv());
+  t.deepEqual("string 3", await recv());
+  t.deepEqual("string 4", await recv());
 
-  t.deepEqual(
-    ["something", "something", "something", "something"],
-    await Promise.all(out),
-  );
 });
