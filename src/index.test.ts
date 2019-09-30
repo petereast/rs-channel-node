@@ -29,3 +29,33 @@ test("functional channels work better", async (t: TestContext) => {
   t.deepEqual("string 3", await recv());
   t.deepEqual("string 4", await recv());
 });
+
+test("a channel can be read and written to at the same time", async (t: TestContext) => {
+  const [send, recv] = channel<string>();
+
+  send("string 1");
+  t.deepEqual("string 1", await recv());
+  send("string 2");
+  t.deepEqual("string 2", await recv());
+  send("string 3");
+  t.deepEqual("string 3", await recv());
+  send("string 4");
+  t.deepEqual("string 4", await recv());
+  send("string 5");
+  t.deepEqual("string 5", await recv());
+});
+
+test("the order doesn't really mattter", async (t: TestContext) => {
+  const [send, recv] = channel<string>();
+
+  send("string 1");
+  send("string 2");
+  t.deepEqual("string 1", await recv());
+  t.deepEqual("string 2", await recv());
+  send("string 3");
+  t.deepEqual("string 3", await recv());
+  send("string 4");
+  t.deepEqual("string 4", await recv());
+  send("string 5");
+  t.deepEqual("string 5", await recv());
+});
