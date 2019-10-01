@@ -1,15 +1,20 @@
 import { DataStream } from "./data_stream";
 
+export type Sender<T> = (item: T) => void;
+export type Reciever<T> = () => Promise<T>;
+
+export type Channel<T> = [Sender<T>, Reciever<T>];
+
 export function channel<T>(
   maxSize: number = 100,
-): [(item: T) => void, () => Promise<T>] {
+): Channel<T> {
   const stream = new DataStream();
 
-  const send = (i: T) => {
+  const send: Sender<T> = (i: T) => {
     stream.write(i);
   };
 
-  const recv = (): Promise<T> => {
+  const recv: Reciever<T> = (): Promise<T> => {
     return new Promise((resolve, reject) => {
       stream.resume();
       stream.once("data", data => {
