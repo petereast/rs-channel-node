@@ -1,4 +1,4 @@
-# rs-channel-node
+# rs-channel-node [![Build Status](https://travis-ci.com/petereast/rs-channel-node.svg?branch=master)](https://travis-ci.com/petereast/rs-channel-node)
 
 Inspired by [Rust Channels](https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html).
 This is a simple library designed to provide an internal messaging system similar to _Channels_ in rust. So that things can communicate with each other asynchronously in a way that's nicely declarative. It's supposed to simplify how different actors talk to each other without the user having to do the deep dive into node's streams, event emitters or other stuff like that.
