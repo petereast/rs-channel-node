@@ -3,17 +3,17 @@ import { channel } from ".";
 
 test("A channel blocks until it's got something", async (t: TestContext) => {
   return new Promise((resolve, reject) => {
-    const [send, recieve] = channel<string>();
+    const [send, receiver] = channel<string>();
     t.plan(1);
     setTimeout(() => {
       t.pass();
       resolve();
     }, 200);
 
-    const _ = recieve().then(() => t.fail());
+    const _ = receiver().then(() => t.fail());
   });
 });
-test.todo("A channel will error if it tries to send without a reciever");
+test.todo("A channel will error if it tries to send without a receiver");
 test.todo("The channel can exist across many contexts");
 
 test("functional channels work better", async (t: TestContext) => {

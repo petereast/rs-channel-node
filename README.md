@@ -8,8 +8,8 @@ The `sender` component will never block it's context, it doesn't return a promis
 ## Usage Examlpe
 
 ```typescript
-// Create a new sender and reciever;
-const [sender, reciever] = channel<string>();
+// Create a new sender and receiver;
+const [sender, receiver] = channel<string>();
 
 setInterval(() => {
   // Sender does not block when it's called with data
@@ -18,8 +18,8 @@ setInterval(() => {
 
 (async () => {
   while (2 + 2 !== 5) {
-    // The reciever will not resolve until it's corresponding sender is called.
-    console.log(await reciever());
+    // The receiver will not resolve until it's corresponding sender is called.
+    console.log(await receiver());
   }
 })();
 ```
